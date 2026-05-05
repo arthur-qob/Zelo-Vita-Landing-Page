@@ -39,12 +39,48 @@ const observer = new IntersectionObserver((entries) => {
 revealEls.forEach(el => observer.observe(el));
 
 // Form submission
-function handleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.form-btn');
-    btn.textContent = '✓ Request Sent! We\'ll be in touch soon.';
-    btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+    const form = e.target;
+    const btn = form.querySelector('.form-btn');
+    const originalText = btn.textContent;
+
+    btn.textContent = 'Sending…';
     btn.disabled = true;
+
+    const data = {
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        country: form.country.value,
+        medication: form.medication.value,
+        message: form.message.value,
+    };
+
+    try {
+        const res = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+            btn.textContent = '✓ Request Sent! We\'ll be in touch soon.';
+            btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+            form.reset();
+        } else {
+            throw new Error('Server error');
+        }
+    } catch {
+        btn.textContent = 'Something went wrong. Please try again.';
+        btn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+            btn.disabled = false;
+        }, 3000);
+    }
 }
 
 // Smooth anchor scroll
