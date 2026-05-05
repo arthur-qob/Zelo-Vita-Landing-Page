@@ -19,7 +19,7 @@ module.exports = async function handler(req, res) {
 		body: JSON.stringify({
 			from: 'Zelo Vita Landing Page <onboarding@resend.dev>',
 			// to: ['consultoriazelovitaim@gmail.com'],
-			to: ['arthur.quinellato@gmail.com'],
+			to: ['arthurquinellato.dev@gmail.com'],
 			subject: `New Prospect Contact — ${firstName} ${lastName} (${medication})`,
 			html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -39,9 +39,11 @@ module.exports = async function handler(req, res) {
 
 	if (!response.ok) {
 		const error = await response.json()
-		return res
-			.status(502)
-			.json({ error: error.message ?? 'Failed to send email' })
+		console.error('Resend error:', JSON.stringify(error))
+		return res.status(502).json({
+			error: error.message ?? 'Failed to send email',
+			details: error
+		})
 	}
 
 	return res.status(200).json({ success: true })
