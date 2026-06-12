@@ -83,6 +83,119 @@ async function handleSubmit(e) {
     }
 }
 
+// Testimonial carousel (activates when there are more than 3 cards)
+function initTestimonialCarousel() {
+    const grid = document.querySelector('.testimonials-grid');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.testi-card'));
+    if (cards.length <= 3) return;
+
+    const track = document.createElement('div');
+    track.className = 'carousel-track';
+    grid.parentNode.insertBefore(track, grid);
+    track.appendChild(grid);
+
+    const nav = document.createElement('div');
+    nav.className = 'carousel-nav';
+    track.parentNode.insertBefore(nav, track.nextSibling);
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'carousel-btn carousel-prev';
+    prevBtn.setAttribute('aria-label', 'Anterior');
+    prevBtn.innerHTML = '&#8249;';
+
+    const dotsEl = document.createElement('div');
+    dotsEl.className = 'carousel-dots';
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'carousel-btn carousel-next';
+    nextBtn.setAttribute('aria-label', 'Próximo');
+    nextBtn.innerHTML = '&#8250;';
+
+    nav.appendChild(prevBtn);
+    nav.appendChild(dotsEl);
+    nav.appendChild(nextBtn);
+
+    grid.classList.add('is-carousel');
+
+    let currentIndex = 0;
+
+    function getVisible() {
+        if (window.innerWidth < 600) return 1;
+        if (window.innerWidth < 960) return 2;
+        return 3;
+    }
+
+    function maxIndex() {
+        return Math.max(0, cards.length - getVisible());
+    }
+
+    function getStepPx() {
+        const visible = getVisible();
+        const gap = 22;
+        const cardWidth = (track.offsetWidth - (visible - 1) * gap) / visible;
+        return cardWidth + gap;
+    }
+
+    function updateCardWidth() {
+        const visible = getVisible();
+        const gap = 22;
+        const cardWidth = (track.offsetWidth - (visible - 1) * gap) / visible;
+        grid.style.setProperty('--carousel-card-width', cardWidth + 'px');
+    }
+
+    function buildDots() {
+        dotsEl.innerHTML = '';
+        for (let i = 0; i <= maxIndex(); i++) {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot';
+            dot.setAttribute('aria-label', `Ir para ${i + 1}`);
+            dot.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(dot);
+        }
+    }
+
+    function updateDots() {
+        dotsEl.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+
+    function goTo(index) {
+        currentIndex = Math.max(0, Math.min(index, maxIndex()));
+        grid.style.transform = `translateX(-${currentIndex * getStepPx()}px)`;
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= maxIndex();
+        updateDots();
+    }
+
+    prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+    nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) goTo(currentIndex + (diff > 0 ? 1 : -1));
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            updateCardWidth();
+            buildDots();
+            goTo(Math.min(currentIndex, maxIndex()));
+        }, 100);
+    });
+
+    updateCardWidth();
+    buildDots();
+    goTo(0);
+}
+
+initTestimonialCarousel();
+
 // Smooth anchor scroll
 document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {

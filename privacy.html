@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Política de Privacidade — Zelo Vita</title>
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+			rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			href="styles.css" />
+		<link
+			rel="icon"
+			href="assets/favicon.ico"
+			type="image/x-icon" />
+		<style>
+			.privacy-hero {
+				padding: 140px 0 60px;
+				text-align: center;
+			}
+
+			.privacy-viewer {
+				padding: 0 0 100px;
+			}
+
+			.privacy-viewer .inner {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+
+			.pdf-toolbar {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 16px;
+				flex-wrap: wrap;
+			}
+
+			.pdf-toolbar-label {
+				font-size: 0.85rem;
+				color: rgba(255, 255, 255, 0.45);
+			}
+
+			.pdf-download-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 10px 20px;
+				border-radius: 10px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.06);
+				color: rgba(255, 255, 255, 0.8);
+				font-size: 0.85rem;
+				font-weight: 500;
+				font-family: inherit;
+				text-decoration: none;
+				transition:
+					background 0.2s,
+					border-color 0.2s,
+					color 0.2s;
+				cursor: pointer;
+			}
+
+			.pdf-download-btn:hover {
+				background: rgba(94, 211, 230, 0.1);
+				border-color: rgba(94, 211, 230, 0.35);
+				color: var(--cyan);
+			}
+
+			.pdf-frame-wrap {
+				border-radius: 18px;
+				overflow: hidden;
+				border: 1px solid rgba(255, 255, 255, 0.07);
+				background: rgba(255, 255, 255, 0.025);
+				height: 80vh;
+				min-height: 500px;
+			}
+
+			.pdf-frame-wrap iframe {
+				width: 100%;
+				height: 100%;
+				border: none;
+				display: block;
+			}
+
+			.pdf-fallback {
+				display: none;
+				padding: 60px 32px;
+				text-align: center;
+			}
+
+			.pdf-fallback p {
+				color: rgba(255, 255, 255, 0.5);
+				margin-bottom: 20px;
+				font-size: 0.92rem;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- NAVBAR -->
+		<nav id="navbar">
+			<a
+				href="/"
+				class="nav-logo">
+				<img
+					src="assets/zelo_vite_logo.jpg"
+					alt="Zelo Vita Logo" />
+				<span class="nav-logo-text">Zelo Vita</span>
+			</a>
+			<ul class="nav-links">
+				<li><a href="/#about">Quem Somos</a></li>
+				<li><a href="/#how-it-works">Como Funciona</a></li>
+				<li><a href="/#services">Serviços</a></li>
+				<li><a href="/#trust">Por Que Nós</a></li>
+				<li>
+					<a
+						href="/#contact"
+						class="nav-cta">
+						Solicitar Medicamento
+					</a>
+				</li>
+			</ul>
+			<div
+				class="hamburger"
+				id="hamburger"
+				aria-label="Abrir menu"
+				role="button">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</nav>
+
+		<!-- Mobile Menu -->
+		<div
+			class="mobile-menu"
+			id="mobileMenu">
+			<span
+				class="mobile-close"
+				id="mobileClose">
+				&#215;
+			</span>
+			<a
+				href="/#about"
+				class="mobile-nav-link">
+				Quem Somos
+			</a>
+			<a
+				href="/#how-it-works"
+				class="mobile-nav-link">
+				Como Funciona
+			</a>
+			<a
+				href="/#services"
+				class="mobile-nav-link">
+				Serviços
+			</a>
+			<a
+				href="/#trust"
+				class="mobile-nav-link">
+				Por Que Nós
+			</a>
+			<a
+				href="/#contact"
+				class="mobile-nav-link"
+				style="color: var(--cyan)">
+				Solicitar Medicamento
+			</a>
+		</div>
+
+		<!-- HERO -->
+		<section class="privacy-hero">
+			<div class="inner" style="max-width: 700px">
+				<div class="section-label">Legal</div>
+				<h1 class="section-title">
+					Política de
+					<span class="gradient-text">Privacidade</span>
+				</h1>
+				<p class="section-sub">
+					Em conformidade com a Lei Geral de Proteção de Dados
+					(LGPD — Lei nº 13.709/2018).
+				</p>
+			</div>
+		</section>
+
+		<!-- PDF VIEWER -->
+		<section class="privacy-viewer">
+			<div class="inner">
+				<div class="pdf-toolbar">
+					<span class="pdf-toolbar-label">
+						Política de Privacidade · Zelo Vita
+					</span>
+					<a
+						href="assets/lgpd.pdf"
+						download
+						class="pdf-download-btn">
+						⬇ Baixar PDF
+					</a>
+				</div>
+
+				<div
+					class="pdf-frame-wrap"
+					id="pdfFrameWrap">
+					<iframe
+						id="pdfFrame"
+						src="assets/lgpd.pdf"
+						title="Política de Privacidade LGPD — Zelo Vita">
+					</iframe>
+					<div
+						class="pdf-fallback"
+						id="pdfFallback">
+						<p>
+							Seu navegador não conseguiu exibir o PDF diretamente.
+						</p>
+						<a
+							href="assets/lgpd.pdf"
+							download
+							class="pdf-download-btn">
+							⬇ Baixar Política de Privacidade
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- FOOTER -->
+		<footer>
+			<div class="inner">
+				<div class="footer-bottom">
+					<span class="footer-copy">
+						© 2025 Zelo Vita. Todos os direitos reservados.
+					</span>
+					<div class="footer-pills">
+						<span class="footer-pill">
+							Licenciado e Regulamentado
+						</span>
+						<span class="footer-pill">SSL Seguro</span>
+						<span class="footer-pill">Conformidade LGPD</span>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script src="script.js"></script>
+		<script>
+			// Show fallback if iframe fails to load the PDF
+			const frame = document.getElementById('pdfFrame');
+			frame.addEventListener('error', () => {
+				document.getElementById('pdfFallback').style.display = 'block';
+				frame.style.display = 'none';
+			});
+		</script>
+	</body>
+</html>
