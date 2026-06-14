@@ -5,7 +5,7 @@
 		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1.0" />
-		<title>Política de Privacidade — Zelo Vita</title>
+		<title>Código de Ética — Zelo Vita</title>
 		<link
 			rel="preconnect"
 			href="https://fonts.googleapis.com" />
@@ -94,15 +94,17 @@
 
 		<!-- HERO -->
 		<section class="privacy-hero">
-			<div class="inner" style="max-width: 700px">
+			<div
+				class="inner"
+				style="max-width: 700px">
 				<div class="section-label">Legal</div>
 				<h1 class="section-title">
-					Política de
-					<span class="gradient-text">Privacidade</span>
+					Código de
+					<span class="gradient-text">Ética</span>
 				</h1>
 				<p class="section-sub">
-					Em conformidade com a Lei Geral de Proteção de Dados
-					(LGPD — Lei nº 13.709/2018).
+					Os princípios e valores que orientam a atuação da Zelo Vita
+					no cuidado com pacientes, fornecedores e parceiros.
 				</p>
 			</div>
 		</section>
@@ -112,10 +114,10 @@
 			<div class="inner">
 				<div class="pdf-toolbar">
 					<span class="pdf-toolbar-label">
-						Política de Privacidade · Zelo Vita
+						Código de Ética · Zelo Vita
 					</span>
 					<a
-						href="assets/lgpd.pdf"
+						href="assets/ethics.pdf"
 						download
 						class="pdf-download-btn">
 						⬇ Baixar PDF
@@ -127,20 +129,20 @@
 					id="pdfFrameWrap">
 					<iframe
 						id="pdfFrame"
-						src="assets/lgpd.pdf"
-						title="Política de Privacidade LGPD — Zelo Vita">
-					</iframe>
+						src="assets/cod_etica.pdf"
+						title="Código de Ética — Zelo Vita"></iframe>
 					<div
 						class="pdf-fallback"
 						id="pdfFallback">
 						<p>
-							Seu navegador não conseguiu exibir o PDF diretamente.
+							Seu navegador não conseguiu exibir o PDF
+							diretamente.
 						</p>
 						<a
-							href="assets/lgpd.pdf"
+							href="assets/cod_etica.pdf"
 							download
 							class="pdf-download-btn">
-							⬇ Baixar Política de Privacidade
+							⬇ Baixar Código de Ética
 						</a>
 					</div>
 				</div>
@@ -168,11 +170,11 @@
 		<script src="script.js"></script>
 		<script>
 			// Show fallback if iframe fails to load the PDF
-			const frame = document.getElementById('pdfFrame');
+			const frame = document.getElementById('pdfFrame')
 			frame.addEventListener('error', () => {
-				document.getElementById('pdfFallback').style.display = 'block';
-				frame.style.display = 'none';
-			});
+				document.getElementById('pdfFallback').style.display = 'block'
+				frame.style.display = 'none'
+			})
 		</script>
 	</body>
 </html>
