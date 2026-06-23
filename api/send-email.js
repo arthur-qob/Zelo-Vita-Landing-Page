@@ -17,8 +17,8 @@ module.exports = async function handler(req, res) {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			from: 'Zelo Vita Landing Page <onboarding@resend.dev>',
-			to: ['consultoriazelovitaim@gmail.com'],
+			from: 'Zelo Vita Website <noreply@zelovita.com.br>',
+			to: ['consultoria@zelovita.com.br'],
 			subject: `Novo Contato de Prospect — ${firstName} ${lastName} (${medication})`,
 			html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

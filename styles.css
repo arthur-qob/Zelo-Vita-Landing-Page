@@ -1141,6 +1141,173 @@ nav.scrolled {
 	flex-shrink: 0;
 }
 
+/* ── PHONE ACTION POPUP ── */
+.phone-action-wrap {
+	position: relative;
+}
+
+.phone-action-trigger {
+	background: none;
+	border: none;
+	font-family: inherit;
+	width: 100%;
+	text-align: left;
+	align-items: center;
+}
+
+/* Icon with WhatsApp badge overlay */
+.phone-action-icon {
+	position: relative;
+}
+
+.whatsapp-badge {
+	position: absolute;
+	bottom: -4px;
+	right: -4px;
+	width: 16px;
+	height: 16px;
+	background: #111;
+	border-radius: 50%;
+	border: 1.5px solid rgba(37, 211, 102, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Two-line label */
+.phone-action-label {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	flex: 1;
+}
+
+.phone-action-number {
+	font-size: 0.92rem;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.6);
+	transition: color 0.25s ease;
+}
+
+.phone-action-trigger:hover .phone-action-number {
+	color: var(--cyan);
+}
+
+.phone-action-hint {
+	font-size: 0.72rem;
+	font-weight: 600;
+	color: #25d366;
+	letter-spacing: 0.3px;
+	opacity: 0.85;
+}
+
+.phone-action-chevron {
+	margin-left: auto;
+	font-size: 1.1rem;
+	opacity: 0.45;
+	transition: transform 0.25s ease, opacity 0.25s ease;
+	line-height: 1;
+}
+
+.phone-action-trigger[aria-expanded="true"] .phone-action-chevron {
+	transform: rotate(90deg);
+	opacity: 0.85;
+}
+
+.phone-popup {
+	position: absolute;
+	left: 0;
+	top: calc(100% + 8px);
+	z-index: 200;
+	background: rgba(10, 10, 20, 0.96);
+	border: 1px solid rgba(94, 211, 230, 0.22);
+	border-radius: 16px;
+	overflow: hidden;
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	box-shadow:
+		0 8px 32px rgba(0, 0, 0, 0.55),
+		0 0 0 1px rgba(94, 211, 230, 0.06);
+	min-width: 230px;
+
+	/* animation */
+	opacity: 0;
+	transform: translateY(-8px) scale(0.97);
+	transition:
+		opacity 0.22s ease,
+		transform 0.22s ease;
+	pointer-events: none;
+}
+
+.phone-popup:not([hidden]) {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+	pointer-events: auto;
+}
+
+/* override [hidden] so CSS animation still runs */
+.phone-popup[hidden] {
+	display: block !important;
+	visibility: hidden;
+}
+
+.phone-popup-option {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 15px 20px;
+	color: rgba(255, 255, 255, 0.75);
+	text-decoration: none;
+	font-size: 0.9rem;
+	font-weight: 500;
+	transition:
+		background 0.18s ease,
+		color 0.18s ease;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.phone-popup-option:last-child {
+	border-bottom: none;
+}
+
+.phone-popup-option:hover {
+	background: rgba(94, 211, 230, 0.07);
+	color: #fff;
+}
+
+.phone-popup-option-icon {
+	width: 34px;
+	height: 34px;
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.95rem;
+	flex-shrink: 0;
+	transition: background 0.18s ease;
+}
+
+.phone-popup-option:hover .phone-popup-option-icon {
+	background: rgba(94, 211, 230, 0.12);
+	border-color: rgba(94, 211, 230, 0.25);
+}
+
+.phone-popup-option--whatsapp .phone-popup-option-icon {
+	color: #25d366;
+}
+
+.phone-popup-option--whatsapp:hover {
+	background: rgba(37, 211, 102, 0.07);
+	color: #fff;
+}
+
+.phone-popup-option--whatsapp:hover .phone-popup-option-icon {
+	background: rgba(37, 211, 102, 0.12);
+	border-color: rgba(37, 211, 102, 0.3);
+}
+
 .contact-form {
 	background: rgba(255, 255, 255, 0.025);
 	border: 1px solid rgba(255, 255, 255, 0.07);
@@ -1376,6 +1543,93 @@ footer {
 	border: 1px solid rgba(255, 255, 255, 0.08);
 	padding: 5px 13px;
 	border-radius: 50px;
+}
+
+/* ── FAQ ── */
+.faq-section {
+	background: rgba(255, 255, 255, 0.012);
+	border-top: 1px solid rgba(255, 255, 255, 0.05);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.faq-header {
+	text-align: center;
+	max-width: 620px;
+	margin: 0 auto 60px;
+}
+
+.faq-list {
+	max-width: 780px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.faq-item {
+	background: rgba(255, 255, 255, 0.028);
+	border: 1px solid rgba(255, 255, 255, 0.07);
+	border-radius: 16px;
+	overflow: hidden;
+	transition: border-color 0.3s ease;
+}
+
+.faq-item:hover {
+	border-color: rgba(94, 211, 230, 0.2);
+}
+
+.faq-question {
+	width: 100%;
+	background: none;
+	border: none;
+	color: white;
+	font-family: 'Inter', sans-serif;
+	font-size: 1rem;
+	font-weight: 600;
+	text-align: left;
+	padding: 22px 24px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	line-height: 1.5;
+}
+
+.faq-question:focus-visible {
+	outline: 2px solid var(--cyan);
+	outline-offset: -2px;
+	border-radius: 16px;
+}
+
+.faq-icon {
+	font-size: 1.5rem;
+	color: var(--cyan);
+	flex-shrink: 0;
+	font-weight: 300;
+	transition: transform 0.3s ease;
+	line-height: 1;
+}
+
+.faq-question[aria-expanded='true'] .faq-icon {
+	transform: rotate(45deg);
+}
+
+.faq-answer {
+	padding: 0 24px 22px;
+	color: rgba(255, 255, 255, 0.55);
+	font-size: 0.92rem;
+	line-height: 1.75;
+}
+
+.faq-answer p {
+	margin: 0;
+}
+
+.faq-answer a {
+	color: var(--cyan);
+	text-decoration: underline;
+	text-underline-offset: 3px;
 }
 
 /* ── SCROLL ANIMATIONS ── */

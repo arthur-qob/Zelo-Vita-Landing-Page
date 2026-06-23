@@ -45,7 +45,7 @@ async function handleSubmit(e) {
     const btn = form.querySelector('.form-btn');
     const originalText = btn.textContent;
 
-    btn.textContent = 'Sending…';
+    btn.textContent = 'Enviando…';
     btn.disabled = true;
 
     const data = {
@@ -66,14 +66,14 @@ async function handleSubmit(e) {
         });
 
         if (res.ok) {
-            btn.textContent = '✓ Request Sent! We\'ll be in touch soon.';
+            btn.textContent = '✓ Solicitação Enviada! Entraremos em contato em breve.';
             btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
             form.reset();
         } else {
             throw new Error('Server error');
         }
     } catch {
-        btn.textContent = 'Something went wrong. Please try again.';
+        btn.textContent = 'Algo deu errado. Por favor, tente novamente.';
         btn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
         setTimeout(() => {
             btn.textContent = originalText;
@@ -196,6 +196,16 @@ function initTestimonialCarousel() {
 
 initTestimonialCarousel();
 
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const answer = btn.nextElementSibling;
+        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !isExpanded);
+        answer.hidden = isExpanded;
+    });
+});
+
 // Smooth anchor scroll
 document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -208,3 +218,41 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         }
     });
 });
+
+// ── Phone / WhatsApp action popup ──
+function togglePhonePopup() {
+    const trigger = document.getElementById('phoneActionTrigger');
+    const popup   = document.getElementById('phoneActionPopup');
+    if (!trigger || !popup) return;
+
+    const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+    if (isOpen) {
+        closePhonePopup();
+    } else {
+        popup.hidden = false;
+        trigger.setAttribute('aria-expanded', 'true');
+    }
+}
+
+function closePhonePopup() {
+    const trigger = document.getElementById('phoneActionTrigger');
+    const popup   = document.getElementById('phoneActionPopup');
+    if (!trigger || !popup) return;
+    popup.hidden = true;
+    trigger.setAttribute('aria-expanded', 'false');
+}
+
+// Close on outside click
+document.addEventListener('click', (e) => {
+    const wrap = document.getElementById('phoneActionWrap');
+    if (wrap && !wrap.contains(e.target)) {
+        closePhonePopup();
+    }
+});
+
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePhonePopup();
+});
+
